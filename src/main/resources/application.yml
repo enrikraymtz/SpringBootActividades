@@ -1,0 +1,48 @@
+---
+server:
+  port: 8080
+  contextPath: /app
+---
+spring:
+  profiles: local, default
+demo.security.jwt:
+  tokenExpirationTime: 15 # Number of minutes
+  refreshTokenExpTime: 60 # Minutes
+  tokenIssuer: http://svlada.com
+  tokenSigningKey: xm8EV6Hy5RMFK4EEACIDAwQus
+datasource:
+  sampleapp:
+    url: jdbc:h2:~/test
+    driverClassName: org.h2.Driver
+    username: SA
+    password:
+    data: "classpath*:data.sql"
+    defaultSchema:
+    maxPoolSize: 10
+    hibernate:
+      hbm2ddl.method: create
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.H2Dialect
+---
+spring:
+  profiles: prod
+datasource:
+  sampleapp:
+    url: jdbc:mysql://localhost:3306/springcrud
+    username: root
+    password: 
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect
+demo.security.jwt:
+  tokenExpirationTime: 15 # Number of minutes
+  refreshTokenExpTime: 60 # Minutes
+  tokenIssuer: http://svlada.com
+  tokenSigningKey: xm8EV6Hy5RMFK4EEACIDAwQus
+  
